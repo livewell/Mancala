@@ -4,7 +4,7 @@ public class MancalaBoard
 	public static final int PLAYER_B_MANCALA = 13;
     private boolean player=true; //true == a, false == b 
     //player=true;
-    private Pit[ ] mancalaBoard;
+    private Pit[] mancalaBoard;
     public Pit[] getBoard()
     {
     	return mancalaBoard;
@@ -27,24 +27,24 @@ public class MancalaBoard
          mancalaBoard[PLAYER_A_MANCALA] = new MancalaPit(0, true);  //WAS 6
          mancalaBoard[PLAYER_B_MANCALA] = new MancalaPit(0, false);	// WAS 13
     }
-    public static void printBoard(Pit[] test)
+    public void printBoard()
     {
     	System.out.print(" ");
     	for(int i = 12; i > 6; i--)
     	{
-    		System.out.print(Integer.toString(test[i].getStones())+ " ");
+    		System.out.print(Integer.toString(mancalaBoard[i].getStones())+ " ");
     	}
     	System.out.println();
-    	System.out.println(test[13].getStones() + " a b c d e f " + test[6].getStones());
+    	System.out.println(mancalaBoard[13].getStones() + " a b c d e f " + mancalaBoard[6].getStones());
     	System.out.print(" ");
     	for(int i = 0; i < 6; i++)
     	{
-    		System.out.print(test[i].getStones() + " ");
+    		System.out.print(mancalaBoard[i].getStones() + " ");
     	}
-
     }
-    /*
-    public void printBoard(Pit[] board)
+
+   /* 
+    public void printBoard2(Pit[] board)
     {
     	for (int i = 0; i < 7; i++)
         {
@@ -60,12 +60,19 @@ public class MancalaBoard
     */
     public void move(int mancalaPitIndex)
     {
-    	//TODO make sure that a rock isnt placed in the enemy mancala or landing in the mancala clears the opposite pit
-    	int stonesInHand = mancalaBoard[mancalaPitIndex].getStones();
+    	int stonesInHand = mancalaBoard[mancalaPitIndex].getStones(); 
     	int mancalaPitIndex2=0;
+    	if(stonesInHand==0)
+    	{
+    		System.out.println("Invalid move, try again");
+    	}
     	mancalaBoard[mancalaPitIndex].setStones(0); //removes the stone from the pit you start with 
     	for(int i = stonesInHand; i >0 ;i--)
     	{ 
+    		if((mancalaPitIndex+= 1)==14) //makes the manacala board wrap around itself hopefully
+    		{
+    			mancalaPitIndex=0;
+    		}
     		if(PLAYER_A_MANCALA==mancalaPitIndex && player==false)
     	   	{   //remove the extra stone added to the enemy players mancala
     		   	mancalaBoard[mancalaPitIndex].setStones(mancalaBoard[mancalaPitIndex].getStones()-1); 
@@ -78,7 +85,6 @@ public class MancalaBoard
     	   	}
     	   	mancalaBoard[mancalaPitIndex+= 1].addStones(); // if it isnt a mancala well
           
-    	   	//if player does not own the mancala, he must skip the mancalla
     	   	if(i==1) //if it is the last stone
     	   	{
     	   		if((PLAYER_A_MANCALA == mancalaPitIndex)&&(player==true)) //if the last stone is in the players mancalapit, then he gets to go again
@@ -93,23 +99,22 @@ public class MancalaBoard
     	   		}
     	   	}
     	}
-       if((mancalaBoard[mancalaPitIndex].getStones()==1)/*&&(mancalaPitIndex!=PLAYER_A_MANCALA)&&(mancalaPitIndex!=PLAYER_B_MANCALA)*/) //you land on an empty spot and it is not a mancala
+       if((mancalaBoard[mancalaPitIndex].getStones()==1)) //you land on an empty spot and it is not a mancala
        {
     	   if((player)&&(mancalaPitIndex!=PLAYER_A_MANCALA)) //if it is player A and is not his mancala
-    	   {								  //CHANGE THIS SHITTY NAME
+    	   {						//if(mancalaPitIndex!=PLAYER_A_MANCALA) {		  
     		   mancalaBoard[PLAYER_A_MANCALA].addStoness(mancalaBoard[mancalaPitIndex+7].getStones());//take the opposite +7 to get accross the board if player A. use -7 if player B
     		   mancalaBoard[mancalaPitIndex+7].clearPit();
-    		   //mancalaBoard[PLAYER_A_MANCALA].addStones();
+    		   //mancalaBoard[PLAYER_A_MANCALA].addStones();  //for some reason overriding this method doesnt work
     	   }
     	  // else
     		if((!player)&&(mancalaPitIndex!=PLAYER_A_MANCALA))   
-    	   {								  //CHANGE THIS SHITTY NAME
+    	   {								  //if(mancalaPitIndex!=PLAYER_B_MANCALA) { //
     		   mancalaBoard[PLAYER_A_MANCALA].addStoness(mancalaBoard[mancalaPitIndex-7].getStones());//take the opposite +7 to get accross the board if player A. use -7 if player B
     		   mancalaBoard[mancalaPitIndex-7].clearPit();
     	   }
        }
        //changes the players turn
-       if(player){player=false;}
-       if(!player){player=true;}
+       player=!player;
    }
 }
