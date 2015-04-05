@@ -9,6 +9,10 @@ public class MancalaBoard
     {
     	return mancalaBoard;
     }
+    public boolean getPlayer()
+    {
+    	return player;
+    }
     public MancalaBoard(int initialStones)
     {
          mancalaBoard = new Pit[14];//set pit 6 and 13 to mancalas
@@ -23,6 +27,23 @@ public class MancalaBoard
          mancalaBoard[PLAYER_A_MANCALA] = new MancalaPit(0, true);  //WAS 6
          mancalaBoard[PLAYER_B_MANCALA] = new MancalaPit(0, false);	// WAS 13
     }
+    public static void printBoard(Pit[] test)
+    {
+    	System.out.print(" ");
+    	for(int i = 12; i > 6; i--)
+    	{
+    		System.out.print(Integer.toString(test[i].getStones())+ " ");
+    	}
+    	System.out.println();
+    	System.out.println(test[13].getStones() + " a b c d e f " + test[6].getStones());
+    	System.out.print(" ");
+    	for(int i = 0; i < 6; i++)
+    	{
+    		System.out.print(test[i].getStones() + " ");
+    	}
+
+    }
+    /*
     public void printBoard(Pit[] board)
     {
     	for (int i = 0; i < 7; i++)
@@ -36,6 +57,7 @@ public class MancalaBoard
         }
         System.out.print("\n");
     }
+    */
     public void move(int mancalaPitIndex)
     {
     	//TODO make sure that a rock isnt placed in the enemy mancala or landing in the mancala clears the opposite pit
@@ -46,11 +68,13 @@ public class MancalaBoard
     	{ 
     		if(PLAYER_A_MANCALA==mancalaPitIndex && player==false)
     	   	{   //remove the extra stone added to the enemy players mancala
-    		   	mancalaBoard[mancalaPitIndex].setStones(mancalaBoard[mancalaPitIndex].getStones()-1);
+    		   	mancalaBoard[mancalaPitIndex].setStones(mancalaBoard[mancalaPitIndex].getStones()-1); 
+    		   	i++;
     	   	} 
     	   	if(PLAYER_B_MANCALA==mancalaPitIndex && player==true)
     	   	{   //remove the extra stone added to the enemy players mancala
     		   	mancalaBoard[mancalaPitIndex].setStones(mancalaBoard[mancalaPitIndex].getStones()-1);
+    		   	i++;
     	   	}
     	   	mancalaBoard[mancalaPitIndex+= 1].addStones(); // if it isnt a mancala well
           
@@ -69,7 +93,6 @@ public class MancalaBoard
     	   		}
     	   	}
     	}
-       ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
        if((mancalaBoard[mancalaPitIndex].getStones()==1)/*&&(mancalaPitIndex!=PLAYER_A_MANCALA)&&(mancalaPitIndex!=PLAYER_B_MANCALA)*/) //you land on an empty spot and it is not a mancala
        {
     	   if((player)&&(mancalaPitIndex!=PLAYER_A_MANCALA)) //if it is player A and is not his mancala
@@ -85,5 +108,8 @@ public class MancalaBoard
     		   mancalaBoard[mancalaPitIndex-7].clearPit();
     	   }
        }
+       //changes the players turn
+       if(player){player=false;}
+       if(!player){player=true;}
    }
 }

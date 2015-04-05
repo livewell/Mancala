@@ -40,5 +40,6 @@ public class Pit
     public boolean whichPlayer()
     {
     return whichPlayer;
-    }    
+    }
+    
 }
