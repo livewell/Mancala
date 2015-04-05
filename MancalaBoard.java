@@ -27,19 +27,19 @@ public class MancalaBoard
          mancalaBoard[PLAYER_A_MANCALA] = new MancalaPit(0, true);  //WAS 6
          mancalaBoard[PLAYER_B_MANCALA] = new MancalaPit(0, false);	// WAS 13
     }
-    public static void printBoard(Pit[] test)
+    public void printBoard()
     {
     	System.out.print(" ");
     	for(int i = 12; i > 6; i--)
     	{
-    		System.out.print(Integer.toString(test[i].getStones())+ " ");
+    		System.out.print(Integer.toString(mancalaBoard[i].getStones())+ " ");
     	}
     	System.out.println();
-    	System.out.println(test[13].getStones() + " a b c d e f " + test[6].getStones());
+    	System.out.println(mancalaBoard[13].getStones() + " a b c d e f " + mancalaBoard[6].getStones());
     	System.out.print(" ");
     	for(int i = 0; i < 6; i++)
     	{
-    		System.out.print(test[i].getStones() + " ");
+    		System.out.print(mancalaBoard[i].getStones() + " ");
     	}
 
     }
