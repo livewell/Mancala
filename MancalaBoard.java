@@ -52,6 +52,7 @@ public class MancalaBoard
     	if(stonesInHand==0)
     	{
     		System.out.println("Invalid move, try again");
+    		return; //wont change the boolean value at the end so the player will go again and wont do anything in the for loop
     	}
     	mancalaBoard[mancalaPitIndex].setStones(0); //removes the stone from the pit you start with 
     	for(int i = stonesInHand; i >0 ;i--)
@@ -108,15 +109,15 @@ public class MancalaBoard
        {
     	   if((player)&&(mancalaPitIndex!=PLAYER_A_MANCALA)) //if it is player A and is not his mancala
     	   {						//if(mancalaPitIndex!=PLAYER_A_MANCALA) {		  
-    		   mancalaBoard[PLAYER_A_MANCALA].addStoness(mancalaBoard[mancalaPitIndex+7].getStones());//take the opposite +7 to get accross the board if player A. use -7 if player B
-    		   mancalaBoard[mancalaPitIndex+7].clearPit();
+    		   mancalaBoard[PLAYER_A_MANCALA].addStoness(mancalaBoard[mancalaPitIndex+6].getStones());//take the opposite +7 to get accross the board if player A. use -7 if player B
+    		   mancalaBoard[mancalaPitIndex+6].clearPit();
     		   //mancalaBoard[PLAYER_A_MANCALA].addStones();  //for some reason overriding this method doesnt work
     	   }
     	  // else
     		if((!player)&&(mancalaPitIndex!=PLAYER_A_MANCALA))   
     	   {								  //if(mancalaPitIndex!=PLAYER_B_MANCALA) { 
-    		   mancalaBoard[PLAYER_A_MANCALA].addStoness(mancalaBoard[mancalaPitIndex-7].getStones());//take the opposite +7 to get accross the board if player A. use -7 if player B
-    		   mancalaBoard[mancalaPitIndex-7].clearPit();
+    		   mancalaBoard[PLAYER_A_MANCALA].addStoness(mancalaBoard[mancalaPitIndex-6].getStones());//take the opposite +7 to get accross the board if player A. use -7 if player B
+    		   mancalaBoard[mancalaPitIndex-6].clearPit();
     	   }
        }
        //changes the players turn
