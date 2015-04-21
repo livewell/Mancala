@@ -1,10 +1,15 @@
+import com.sun.xml.internal.bind.v2.TODO;
+
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.geom.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 /**
  * @author Alan Huynh
@@ -22,7 +27,7 @@ public class MancalaView extends JFrame implements ChangeListener
 
     /**
      * @param b the MancalaBoard we are using to initialize the view
-     * @author Alan Huynh
+     * @author Alan Huynh, Kory Le
      * Initialize a MancalaView with a given MancalaBoard.
      */
     public MancalaView(MancalaBoard b)
@@ -33,6 +38,38 @@ public class MancalaView extends JFrame implements ChangeListener
         GameBoard gameBoard = new GameBoard(0, 0);
         add(gameBoard);
         setTitle("Mancala Game");
+
+        //Buttons for game control
+        JPanel buttonPanel = new JPanel();
+        JButton three = new JButton("3 Stones");
+        three.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent event)
+            {//Fill each player side with 3 stones TODO: call method to draw stones
+            }
+        });
+
+        JButton four = new JButton("4 Stones");
+        four.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent event)
+            {//Fill each player side with 4 stones TODO: call method to draw stones
+            }
+        });
+
+        JButton reset = new JButton("Reset");
+        reset.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent event)
+            {//Reset the game
+            }
+        });
+
+        buttonPanel.add(three);
+        buttonPanel.add(four);
+        buttonPanel.add(reset);
+        add(buttonPanel, BorderLayout.SOUTH);
+
 
         /* Create a mouse listener object */
         MouseListener mouse = new MouseListener()
@@ -114,6 +151,7 @@ class GameBoard extends JPanel
         for (int i = 0; i < boardArray.length; i++)
         {//Draw all of the pits. Todo: Have them display the stones
             g2.draw(boardArray[i]);
+
         }
     }
 }
