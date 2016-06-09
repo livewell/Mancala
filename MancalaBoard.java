@@ -139,7 +139,7 @@ public class MancalaBoard
 
     /**
      * Attach a listener to the MancalaBoard
-     *
+     * testing out github
      * @param c the listener
      */
     public void attach(ChangeListener c)
